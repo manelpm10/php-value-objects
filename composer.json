@@ -1,0 +1,27 @@
+{
+  "name": "manelpm10/php-value-objects",
+  "description": "A PHP library of immutable objects classes.",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Manel Pérez",
+      "email": "yo@manelperez.com"
+    }
+  ],
+  "require": {
+    "php": ">=5.4",
+    "ramsey/uuid": "~3.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "~4.0"
+  },
+  "config": {
+    "bin-dir": "bin"
+  },
+  "autoload": {
+    "psr-4": {"ValueObjects\\": "src"}
+  },
+  "autoload-dev": {
+    "psr-4": { "ValueObjects\\Tests\\": "tests/" }
+  }
+}
