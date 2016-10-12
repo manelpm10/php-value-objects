@@ -16,7 +16,7 @@ abstract class AbstractValueObject
      */
     public function __construct($value)
     {
-        if (($this instanceof \InterfaceNullable && is_null($value)) || $this->guard($value)) {
+        if (($this instanceof InterfaceNullable && is_null($value)) || $this->guard($value)) {
             $this->value = $this->normalizeValue($value);
             return true;
         }
