@@ -16,7 +16,13 @@ Or add to your composer.json file:
 {
     "require": {
         "manelpm10/php-value-objects": "~1.0"
-    }
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/manelpm10/php-value-objects"
+        }
+    ]
 }
 ```
 
@@ -30,7 +36,7 @@ A basic usage of the Value Objects library is:
  
 namespace Module\Book\Domain;
  
-use manelpm10\ValueObjects\Number\Natural;
+use ValueObjects\Number\Natural;
  
 /**
  * Class BookId.
@@ -49,8 +55,8 @@ If you need the value of the Value Object could contain NULL values, you can imp
  
 namespace Module\Book\Domain;
  
-use manelpm10\ValueObjects\String\StringLiteral;
-use manelpm10\ValueObjects\InterfaceNullable;
+use ValueObjects\String\StringLiteral;
+use ValueObjects\InterfaceNullable;
  
 /**
  * Class BookTitle.
