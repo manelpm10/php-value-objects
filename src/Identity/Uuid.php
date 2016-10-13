@@ -15,7 +15,7 @@ class Uuid extends AbstractValueObject
      * @return boolean
      * @throws UuidInvalidException
      */
-    public function guard($value)
+    protected function guard($value)
     {
         if (!BaseUuid::isValid($value)){
             throw new UuidInvalidException($value);

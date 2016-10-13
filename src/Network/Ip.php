@@ -17,7 +17,7 @@ class Ip extends AbstractValueObject
      * @return boolean
      * @throws IpInvalidException
      */
-    public function guard($value)
+    protected function guard($value)
     {
         $filteredValue = filter_var($value, FILTER_VALIDATE_IP);
         if ($filteredValue === false) {

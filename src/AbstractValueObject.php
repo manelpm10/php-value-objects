@@ -46,10 +46,20 @@ abstract class AbstractValueObject
     }
 
     /**
+     * Return stringified value.
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return ''.$this->value;
+    }
+
+    /**
      * Guard that value object is valid.
      *
      * @param mixed $value
      * @return boolean
      */
-    public abstract function guard($value);
+    protected abstract function guard($value);
 }

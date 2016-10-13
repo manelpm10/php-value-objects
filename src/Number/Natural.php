@@ -14,7 +14,7 @@ class Natural extends AbstractValueObject
      * @return boolean
      * @throws NaturalInvalidException
      */
-    public function guard($value)
+    protected function guard($value)
     {
         $filteredValue = filter_var($value, FILTER_VALIDATE_INT);
 

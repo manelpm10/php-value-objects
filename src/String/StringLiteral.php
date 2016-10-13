@@ -14,7 +14,7 @@ class StringLiteral extends AbstractValueObject
      * @return boolean
      * @throws StringInvalidException
      */
-    public function guard($value)
+    protected function guard($value)
     {
         if (false === is_string($value)){
             throw new StringInvalidException($value);

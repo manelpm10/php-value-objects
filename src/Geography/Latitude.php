@@ -17,7 +17,7 @@ class Latitude extends AbstractValueObject
      * @return boolean
      * @throws LatitudeInvalidException
      */
-    public function guard($value)
+    protected function guard($value)
     {
         $filteredValue = filter_var($value, FILTER_VALIDATE_FLOAT);
 

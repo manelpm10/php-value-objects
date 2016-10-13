@@ -263,7 +263,7 @@ class CountryCode extends AbstractValueObject
      * @return boolean
      * @throws CountryCodeInvalidException
      */
-    public function guard($value)
+    protected function guard($value)
     {
         $value = strtoupper($value);
         if (!in_array($value, $this->countries)){

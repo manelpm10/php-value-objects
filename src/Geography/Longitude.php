@@ -17,7 +17,7 @@ class Longitude extends AbstractValueObject
      * @return boolean
      * @throws LongitudeInvalidException
      */
-    public function guard($value)
+    protected function guard($value)
     {
         $filteredValue = filter_var($value, FILTER_VALIDATE_FLOAT);
 
