@@ -18,6 +18,14 @@ class Collection implements \Iterator
     protected $elements = [];
 
     /**
+     * @return mixed|null
+     */
+    public function first()
+    {
+        return $this->elements[0] ?? null;
+    }
+
+    /**
      * @return mixed
      */
     public function current()
