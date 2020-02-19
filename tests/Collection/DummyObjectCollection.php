@@ -6,11 +6,8 @@ use ValueObjects\Collection;
 
 class DummyObjectCollection extends Collection
 {
-    /**
-     * @param DummyObject $dummyObject
-     */
-    public function add(DummyObject $dummyObject)
+    protected function type(): string
     {
-        $this->elements[] = $dummyObject;
+        return DummyObject::class;
     }
 }

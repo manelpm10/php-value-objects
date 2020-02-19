@@ -2,104 +2,127 @@
 
 namespace ValueObjects;
 
-/**
- * Class Collection
- */
-class Collection implements \Iterator
-{
-    /**
-     * @var int
-     */
-    protected $position = 0;
+use function Lambdish\Phunctional\all;
+use function Lambdish\Phunctional\reduce;
+use function Lambdish\Phunctional\sort;
+use ValueObjects\Exception\InvalidCollectionTypeException;
 
-    /**
-     * @var array
-     */
+abstract class Collection implements \Iterator
+{
+    protected $position = 0;
     protected $elements = [];
 
-    /**
-     * @return mixed|null
-     */
+    public function __construct(array $elements)
+    {
+        foreach ($elements as $element) {
+            if (false === is_a($element, $this->type())) {
+                throw new InvalidCollectionTypeException($element, $this->type());
+            }
+        }
+
+        $this->elements = $elements;
+    }
+
+    public static function createEmpty()
+    {
+        return new static([]);
+    }
+
+    abstract protected function type(): string;
+
     public function first()
     {
         return $this->elements[0] ?? null;
     }
 
-    /**
-     * @return mixed
-     */
+    public function last()
+    {
+        $lastElementIndex = $this->count() - 1;
+
+        return $this->elements[$lastElementIndex] ?? null;
+    }
+
     public function current()
     {
         return $this->elements[$this->position];
     }
 
-    /**
-     * @return int
-     */
-    public function key()
+    public function key(): int
     {
         return $this->position;
     }
 
-    /**
-     * @return void
-     */
-    public function next()
+    public function next(): void
     {
         ++$this->position;
     }
 
-    /**
-     * @return void
-     */
-    public function rewind()
+    public function rewind(): void
     {
         $this->position = 0;
     }
 
-    /**
-     * @return bool
-     */
-    public function valid()
+    public function valid(): bool
     {
         return isset($this->elements[$this->position]);
     }
 
-    /**
-     * @return array
-     */
-    public function value()
-    {
-        return $this->toArray();
-    }
-
-    /**
-     * @return int
-     */
-    public function count()
+    public function count(): int
     {
         return count($this->elements);
     }
 
-    /**
-     * @return boolean
-     */
-    public function isEmpty()
+    public function isEmpty(): bool
     {
         return empty($this->elements);
     }
 
-    /**
-     * @return array
-     */
-    public function toArray()
+    public function add($element): void
     {
-        $elements = [];
-        foreach($this->elements as $element)
-        {
-            $elements[] = $element->value();
+        if (false === is_a($element, $this->type())) {
+            throw new InvalidCollectionTypeException($element, $this->type());
         }
 
-        return $elements;
+        $this->elements[] = $element;
+    }
+
+    public function extract(): self
+    {
+        $elements = $this->toArray();
+        $this->clear();
+
+        return new static($elements);
+    }
+
+    public function each(callable $fn): void
+    {
+        foreach ($this->elements as $key => $element) {
+            $fn($element, $key);
+        }
+    }
+
+    public function all(callable $predicate): bool
+    {
+        return all($predicate, $this->toArray());
+    }
+
+    public function sort(callable $criteria)
+    {
+        return new static(sort($criteria, $this->toArray()));
+    }
+
+    public function reduce(callable $fn, $initialValue)
+    {
+        return reduce($fn, $this->toArray(), $initialValue);
+    }
+
+    public function clear(): void
+    {
+        $this->elements = [];
+    }
+
+    public function toArray(): array
+    {
+        return $this->elements;
     }
 }
