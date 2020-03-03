@@ -2,6 +2,7 @@
 
 namespace ValueObjects\Tests\Number;
 
+use ValueObjects\Exception\Number\RealInvalidException;
 use ValueObjects\Number\Real;
 
 class RealTest extends \PHPUnit_Framework_TestCase
@@ -35,7 +36,7 @@ class RealTest extends \PHPUnit_Framework_TestCase
      */
     public function testNotValidValues($value)
     {
-        $this->setExpectedException('\ValueObjects\Exception\Number\RealInvalidException');
+        $this->setExpectedException(RealInvalidException::class);
         new Real($value);
     }
 

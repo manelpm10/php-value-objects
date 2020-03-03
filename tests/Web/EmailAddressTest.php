@@ -2,6 +2,7 @@
 
 namespace ValueObjects\Tests\Web;
 
+use ValueObjects\Exception\Web\EmailAddressInvalidException;
 use ValueObjects\Web\EmailAddress;
 
 class EmailAddressTest extends \PHPUnit_Framework_TestCase
@@ -38,7 +39,7 @@ class EmailAddressTest extends \PHPUnit_Framework_TestCase
      */
     public function testNotValidValues($value)
     {
-        $this->setExpectedException('\ValueObjects\Exception\Web\EmailAddressInvalidException');
+        $this->setExpectedException(EmailAddressInvalidException::class);
         new EmailAddress($value);
     }
 

@@ -2,6 +2,7 @@
 
 namespace ValueObjects\Tests\Geography;
 
+use ValueObjects\Exception\Geography\LocaleInvalidException;
 use ValueObjects\Geography\Locale;
 
 class LocaleTest extends \PHPUnit_Framework_TestCase
@@ -30,7 +31,7 @@ class LocaleTest extends \PHPUnit_Framework_TestCase
      */
     public function testNotValidValues($value)
     {
-        $this->setExpectedException('\ValueObjects\Exception\Geography\LocaleInvalidException');
+        $this->setExpectedException(LocaleInvalidException::class);
         new Locale($value);
     }
 

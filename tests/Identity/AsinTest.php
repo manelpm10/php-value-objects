@@ -2,6 +2,7 @@
 
 namespace ValueObjects\Tests\Identity;
 
+use ValueObjects\Exception\Identity\AsinInvalidException;
 use ValueObjects\Identity\Asin;
 
 class AsinTest extends \PHPUnit_Framework_TestCase
@@ -29,7 +30,7 @@ class AsinTest extends \PHPUnit_Framework_TestCase
      */
     public function testNotValidValues($value)
     {
-        $this->setExpectedException('\ValueObjects\Exception\Identity\AsinInvalidException');
+        $this->setExpectedException(AsinInvalidException::class);
         new Asin($value);
     }
 

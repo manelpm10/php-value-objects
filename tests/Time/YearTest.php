@@ -2,6 +2,7 @@
 
 namespace ValueObjects\Tests\Time;
 
+use ValueObjects\Exception\Time\YearInvalidException;
 use ValueObjects\Time\Year;
 
 class YearTest extends \PHPUnit_Framework_TestCase
@@ -28,7 +29,7 @@ class YearTest extends \PHPUnit_Framework_TestCase
      */
     public function testNotValidValues($value)
     {
-        $this->setExpectedException('\ValueObjects\Exception\Time\YearInvalidException');
+        $this->setExpectedException(YearInvalidException::class);
         new Year($value);
     }
 

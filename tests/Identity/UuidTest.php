@@ -2,6 +2,7 @@
 
 namespace ValueObjects\Tests\Identity;
 
+use ValueObjects\Exception\Identity\UuidInvalidException;
 use ValueObjects\Identity\Uuid;
 
 class UuidTest extends \PHPUnit_Framework_TestCase
@@ -31,7 +32,7 @@ class UuidTest extends \PHPUnit_Framework_TestCase
      */
     public function testNotValidValues($value)
     {
-        $this->setExpectedException('\ValueObjects\Exception\Identity\UuidInvalidException');
+        $this->setExpectedException(UuidInvalidException::class);
         new Uuid($value);
     }
 

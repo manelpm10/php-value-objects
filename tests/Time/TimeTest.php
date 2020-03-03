@@ -2,6 +2,7 @@
 
 namespace ValueObjects\Tests\Time;
 
+use ValueObjects\Exception\Time\TimeInvalidException;
 use ValueObjects\Time\Time;
 
 class TimeTest extends \PHPUnit_Framework_TestCase
@@ -43,7 +44,7 @@ class TimeTest extends \PHPUnit_Framework_TestCase
      */
     public function testNotValidValues($value, $format)
     {
-        $this->setExpectedException('\ValueObjects\Exception\Time\TimeInvalidException');
+        $this->setExpectedException(TimeInvalidException::class);
         new Time($value, $format);
     }
 

@@ -2,6 +2,7 @@
 
 namespace ValueObjects\Tests\Geography;
 
+use ValueObjects\Exception\Geography\LanguageCodeInvalidException;
 use ValueObjects\Geography\LanguageCode;
 
 class LanguageCodeTest extends \PHPUnit_Framework_TestCase
@@ -28,7 +29,7 @@ class LanguageCodeTest extends \PHPUnit_Framework_TestCase
      */
     public function testNotValidValues($value)
     {
-        $this->setExpectedException('\ValueObjects\Exception\Geography\LanguageCodeInvalidException');
+        $this->setExpectedException(LanguageCodeInvalidException::class);
         new LanguageCode($value);
     }
 

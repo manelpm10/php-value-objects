@@ -2,6 +2,7 @@
 
 namespace ValueObjects\Tests\Geography;
 
+use ValueObjects\Exception\Geography\LatitudeInvalidException;
 use ValueObjects\Geography\Latitude;
 
 class LatitudeTest extends \PHPUnit_Framework_TestCase
@@ -35,7 +36,7 @@ class LatitudeTest extends \PHPUnit_Framework_TestCase
      */
     public function testNotValidValues($value)
     {
-        $this->setExpectedException('\ValueObjects\Exception\Geography\LatitudeInvalidException');
+        $this->setExpectedException(LatitudeInvalidException::class);
         new Latitude($value);
     }
 

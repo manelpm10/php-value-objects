@@ -2,6 +2,7 @@
 
 namespace ValueObjects\Tests\Money;
 
+use ValueObjects\Exception\Money\CurrencyCodeInvalidException;
 use ValueObjects\Money\CurrencyCode;
 
 class CurrencyCodeTest extends \PHPUnit_Framework_TestCase
@@ -28,7 +29,7 @@ class CurrencyCodeTest extends \PHPUnit_Framework_TestCase
      */
     public function testNotValidValues($value)
     {
-        $this->setExpectedException('\ValueObjects\Exception\Money\CurrencyCodeInvalidException');
+        $this->setExpectedException(CurrencyCodeInvalidException::class);
         new CurrencyCode($value);
     }
 

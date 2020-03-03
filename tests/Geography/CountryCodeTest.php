@@ -2,6 +2,7 @@
 
 namespace ValueObjects\Tests\Geography;
 
+use ValueObjects\Exception\Geography\CountryCodeInvalidException;
 use ValueObjects\Geography\CountryCode;
 
 class CountryCodeTest extends \PHPUnit_Framework_TestCase
@@ -28,7 +29,7 @@ class CountryCodeTest extends \PHPUnit_Framework_TestCase
      */
     public function testNotValidValues($value)
     {
-        $this->setExpectedException('\ValueObjects\Exception\Geography\CountryCodeInvalidException');
+        $this->setExpectedException(CountryCodeInvalidException::class);
         new CountryCode($value);
     }
 

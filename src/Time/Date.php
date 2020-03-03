@@ -7,24 +7,9 @@ use ValueObjects\Exception\Time\DateInvalidException;
 
 class Date extends AbstractValueObject
 {
-    /**
-     * @var string
-     */
     private $format;
-
-    /**
-     * @var Year
-     */
     private $year;
-
-    /**
-     * @var Month
-     */
     private $month;
-
-    /**
-     * @var Day
-     */
     private $day;
 
     /**
@@ -33,7 +18,7 @@ class Date extends AbstractValueObject
      * @param string $value
      * @param string $format
      */
-    public function __construct($value, $format = 'Y-m-d')
+    public function __construct($value, string $format = 'Y-m-d')
     {
         $this->format = $format;
         parent::__construct($value);
@@ -60,47 +45,73 @@ class Date extends AbstractValueObject
         return true;
     }
 
-    /**
-     * @return Year
-     */
-    public function getYear()
+    public function format(): string
+    {
+        return $this->format;
+    }
+
+    public function getYear(): Year
     {
         return clone $this->year;
     }
 
-    /**
-     * @return Month
-     */
-    public function getMonth()
+    public function getMonth(): Month
     {
         return clone $this->month;
     }
 
-    /**
-     * @return Day
-     */
-    public function getDay()
+    public function getDay(): Day
     {
         return clone $this->day;
     }
 
-    /**
-     * @var string $format
-     *
-     * @return Date
-     */
-    public static function now($format = 'Y-m-d')
+    public function equalsTo($otherDate): bool
+    {
+        /** @var self $otherDate */
+        $datetimeOne = \DateTime::createFromFormat($this->format, $this->value);
+        $datetimeTwo = \DateTime::createFromFormat($otherDate->format(), $otherDate->value());
+
+        return $datetimeOne == $datetimeTwo;
+    }
+
+    public function greaterThan(Date $otherDate): bool
+    {
+        $datetimeOne = \DateTime::createFromFormat($this->format, $this->value);
+        $datetimeTwo = \DateTime::createFromFormat($otherDate->format(), $otherDate->value());
+
+        return $datetimeOne > $datetimeTwo;
+    }
+
+    public function greaterThanEquals(Date $otherDate): bool
+    {
+        $datetimeOne = \DateTime::createFromFormat($this->format, $this->value);
+        $datetimeTwo = \DateTime::createFromFormat($otherDate->format(), $otherDate->value());
+
+        return $datetimeOne >= $datetimeTwo;
+    }
+
+    public function lowerThan(Date $otherDate): bool
+    {
+        $datetimeOne = \DateTime::createFromFormat($this->format, $this->value);
+        $datetimeTwo = \DateTime::createFromFormat($otherDate->format(), $otherDate->value());
+
+        return $datetimeOne < $datetimeTwo;
+    }
+
+    public function lowerThanEquals(Date $otherDate): bool
+    {
+        $datetimeOne = \DateTime::createFromFormat($this->format, $this->value);
+        $datetimeTwo = \DateTime::createFromFormat($otherDate->format(), $otherDate->value());
+
+        return $datetimeOne <= $datetimeTwo;
+    }
+
+    public static function now(string $format = 'Y-m-d'): Date
     {
         return new static(date($format), $format);
     }
 
-    /**
-     * Normalize the value.
-     *
-     * @param mixed $value
-     * @return mixed
-     */
-    protected function normalizeValue($value)
+    protected function normalizeValue($value): string
     {
         return ''.date($this->format, mktime(0, 0, 0, $this->month->value(), $this->day->value(), $this->year->value()));
     }

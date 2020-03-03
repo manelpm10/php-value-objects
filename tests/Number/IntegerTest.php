@@ -2,6 +2,7 @@
 
 namespace ValueObjects\Tests\Number;
 
+use ValueObjects\Exception\Number\IntegerInvalidException;
 use ValueObjects\Number\Integer;
 
 class IntegerTest extends \PHPUnit_Framework_TestCase
@@ -31,7 +32,7 @@ class IntegerTest extends \PHPUnit_Framework_TestCase
      */
     public function testNotValidValues($value)
     {
-        $this->setExpectedException('\ValueObjects\Exception\Number\IntegerInvalidException');
+        $this->setExpectedException(IntegerInvalidException::class);
         new Integer($value);
     }
 

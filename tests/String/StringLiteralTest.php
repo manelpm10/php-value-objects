@@ -2,6 +2,7 @@
 
 namespace ValueObjects\Tests\String;
 
+use ValueObjects\Exception\String\StringInvalidException;
 use ValueObjects\String\StringLiteral;
 
 class StringLiteralTest extends \PHPUnit_Framework_TestCase
@@ -28,7 +29,7 @@ class StringLiteralTest extends \PHPUnit_Framework_TestCase
      */
     public function testNotValidValues($value)
     {
-        $this->setExpectedException('\ValueObjects\Exception\String\StringInvalidException');
+        $this->setExpectedException(StringInvalidException::class);
         new StringLiteral($value);
     }
 

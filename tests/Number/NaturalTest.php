@@ -2,6 +2,7 @@
 
 namespace ValueObjects\Tests\Number;
 
+use ValueObjects\Exception\Number\NaturalInvalidException;
 use ValueObjects\Number\Natural;
 
 class NaturalTest extends \PHPUnit_Framework_TestCase
@@ -28,7 +29,7 @@ class NaturalTest extends \PHPUnit_Framework_TestCase
      */
     public function testNotValidValues($value)
     {
-        $this->setExpectedException('\ValueObjects\Exception\Number\NaturalInvalidException');
+        $this->setExpectedException(NaturalInvalidException::class);
         new Natural($value);
     }
 

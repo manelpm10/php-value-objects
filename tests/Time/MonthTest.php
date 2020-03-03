@@ -2,6 +2,7 @@
 
 namespace ValueObjects\Tests\Time;
 
+use ValueObjects\Exception\Time\MonthInvalidException;
 use ValueObjects\Time\Month;
 
 class MonthTest extends \PHPUnit_Framework_TestCase
@@ -39,7 +40,7 @@ class MonthTest extends \PHPUnit_Framework_TestCase
      */
     public function testNotValidValues($value)
     {
-        $this->setExpectedException('\ValueObjects\Exception\Time\MonthInvalidException');
+        $this->setExpectedException(MonthInvalidException::class);
         new Month($value);
     }
 

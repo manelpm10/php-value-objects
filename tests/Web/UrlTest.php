@@ -2,6 +2,7 @@
 
 namespace ValueObjects\Tests\Web;
 
+use ValueObjects\Exception\Web\UrlInvalidException;
 use ValueObjects\Web\Url;
 
 class UrlTest extends \PHPUnit_Framework_TestCase
@@ -32,7 +33,7 @@ class UrlTest extends \PHPUnit_Framework_TestCase
      */
     public function testNotValidValues($value)
     {
-        $this->setExpectedException('\ValueObjects\Exception\Web\UrlInvalidException');
+        $this->setExpectedException(UrlInvalidException::class);
         new Url($value);
     }
 

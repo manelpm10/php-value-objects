@@ -2,6 +2,7 @@
 
 namespace ValueObjects\Tests\Time;
 
+use ValueObjects\Exception\Time\DayInvalidException;
 use ValueObjects\Time\Day;
 
 class DayTest extends \PHPUnit_Framework_TestCase
@@ -29,7 +30,7 @@ class DayTest extends \PHPUnit_Framework_TestCase
      */
     public function testNotValidValues($value)
     {
-        $this->setExpectedException('\ValueObjects\Exception\Time\DayInvalidException');
+        $this->setExpectedException(DayInvalidException::class);
         new Day($value);
     }
 

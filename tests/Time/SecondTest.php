@@ -2,6 +2,7 @@
 
 namespace ValueObjects\Tests\Time;
 
+use ValueObjects\Exception\Time\SecondInvalidException;
 use ValueObjects\Time\Second;
 
 class SecondTest extends \PHPUnit_Framework_TestCase
@@ -29,7 +30,7 @@ class SecondTest extends \PHPUnit_Framework_TestCase
      */
     public function testNotValidValues($value)
     {
-        $this->setExpectedException('\ValueObjects\Exception\Time\SecondInvalidException');
+        $this->setExpectedException(SecondInvalidException::class);
         new Second($value);
     }
 
