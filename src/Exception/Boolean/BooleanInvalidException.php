@@ -1,6 +1,6 @@
 <?php
 
-namespace ValueObjects\Exception\Types;
+namespace ValueObjects\Exception\Boolean;
 
 final class BooleanInvalidException extends \InvalidArgumentException
 {

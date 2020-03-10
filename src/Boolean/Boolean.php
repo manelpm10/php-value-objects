@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace ValueObjects\Types;
+namespace ValueObjects\Boolean;
 
 use ValueObjects\AbstractValueObject;
-use ValueObjects\Exception\Types\BooleanInvalidException;
+use ValueObjects\Exception\Boolean\BooleanInvalidException;
 
 class Boolean extends AbstractValueObject
 {

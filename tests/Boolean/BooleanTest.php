@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace ValueObjects\Tests\Types;
+namespace ValueObjects\Tests\Boolean;
 
-use ValueObjects\Exception\Types\BooleanInvalidException;
-use ValueObjects\Types\Boolean;
+use ValueObjects\Exception\Boolean\BooleanInvalidException;
+use ValueObjects\Boolean\Boolean;
 
 final class BooleanTest extends \PHPUnit_Framework_TestCase
 {
