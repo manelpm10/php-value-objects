@@ -21,10 +21,8 @@ final class BooleanTest extends \PHPUnit_Framework_TestCase
     public function validValuesProvider()
     {
         return array(
-            'String true is a valid value' => ['true', true],
-            'String 1 is a valid value' => ['1', true],
-            'Empty String is a valid value' => ['', false],
-            'Integer 0 is a valid value' => [0, false],
+            'Boolean true is a valid value' => [true, true],
+            'Boolean false is a valid value' => [false, false],
         );
     }
 
@@ -40,8 +38,10 @@ final class BooleanTest extends \PHPUnit_Framework_TestCase
     public function notValidValuesProvider()
     {
         return array(
-            'Integer besides 1 and 0 is not a valid value' => [2],
+            'Integer 1 is not a valid value' => [2],
             'Random string is not a valid value' => ['hello'],
+            'String true is not a valid value' => ['true'],
+            'Null is not a valid value' => [null],
         );
     }
 }
