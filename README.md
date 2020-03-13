@@ -15,7 +15,7 @@ Or add to your composer.json file:
 ```
 {
     "require": {
-        "manelpm10/php-value-objects": "~1.0"
+        "manelpm10/php-value-objects": "~2.0"
     },
     "repositories": [
         {
@@ -66,6 +66,12 @@ final class BookTitle extends StringLiteral implements InterfaceNullable
 }
 
 ```
+Contributing
+------------
+You can make a fork of the repo and start helping out, if you have Docker installed,
+you can run the `make build` command to start the image, and `make run` to run commands inside it.
+
+The test could also be run with the `make test` command.
 
 License
 -------
