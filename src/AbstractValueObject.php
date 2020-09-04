@@ -62,4 +62,9 @@ abstract class AbstractValueObject
      * @return boolean
      */
     protected abstract function guard($value);
+
+    public function equals($other)
+    {
+        return get_class($this) === get_class($other) && $this->value === $other->value;
+    }
 }
