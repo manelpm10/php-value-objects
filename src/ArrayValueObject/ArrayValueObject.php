@@ -18,14 +18,14 @@ class ArrayValueObject extends AbstractValueObject
      */
     protected function guard($value)
     {
-        foreach ($value as $key => $item) {
-            if (is_array($item)) {
-                $this->guard($item);
+        foreach ($value as $key => $element) {
+            if (is_array($element)) {
+                $this->guard($element);
 
                 return true;
             }
 
-            if (!(is_scalar($item) || is_null($item))) {
+            if (!(is_scalar($element) || is_null($element))) {
                 throw new ArrayValueObjectInvalidException($key);
             }
         }
