@@ -4,10 +4,7 @@ namespace ValueObjects\Exception\Time;
 
 final class YearInvalidException extends \InvalidArgumentException
 {
-    /**
-     * @param mixed $value
-     */
-    public function __construct($value)
+    public function __construct(mixed $value)
     {
         parent::__construct(sprintf('Invalid year value <%s>', $value));
 

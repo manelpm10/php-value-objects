@@ -7,10 +7,7 @@ namespace ValueObjects\Exception\Number;
  */
 final class NaturalInvalidException extends \InvalidArgumentException
 {
-    /**
-     * @param mixed $value
-     */
-    public function __construct($value)
+    public function __construct(mixed $value)
     {
         parent::__construct(sprintf('Invalid natural number value <%s>', $value));
 

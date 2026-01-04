@@ -8,13 +8,9 @@ use ValueObjects\Exception\Number\NaturalInvalidException;
 class Natural extends AbstractValueObject
 {
     /**
-     * Guard that value object is valid.
-     *
-     * @param integer $value
-     * @return boolean
      * @throws NaturalInvalidException
      */
-    protected function guard($value)
+    protected function guard(mixed $value): bool
     {
         $filteredValue = filter_var($value, FILTER_VALIDATE_INT);
 
@@ -26,13 +22,7 @@ class Natural extends AbstractValueObject
         return true;
     }
 
-    /**
-     * Convert the valid natural number (string, int, float...) to native float.
-     *
-     * @param mixed $value
-     * @return int
-     */
-    protected function normalizeValue($value): int
+    protected function normalizeValue(mixed $value): int
     {
         return $value + 0;
     }

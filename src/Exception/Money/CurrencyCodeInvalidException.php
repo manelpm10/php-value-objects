@@ -7,10 +7,7 @@ namespace ValueObjects\Exception\Money;
  */
 final class CurrencyCodeInvalidException extends \InvalidArgumentException
 {
-    /**
-     * @param mixed $value
-     */
-    public function __construct($value)
+    public function __construct(mixed $value)
     {
         parent::__construct(sprintf('Invalid currency code value <%s>', $value));
 

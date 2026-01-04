@@ -7,10 +7,7 @@ namespace ValueObjects\Exception\Identity;
  */
 final class UuidInvalidException extends \InvalidArgumentException
 {
-    /**
-     * @param mixed $value
-     */
-    public function __construct($value)
+    public function __construct(mixed $value)
     {
         parent::__construct(sprintf('Invalid UUID value <%s>', $value));
 

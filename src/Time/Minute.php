@@ -11,13 +11,9 @@ class Minute extends AbstractValueObject
     const MAX_MINUTE = 59;
 
     /**
-     * Guard that value object is valid.
-     *
-     * @param string $value
-     * @return boolean
      * @throws MinuteInvalidException
      */
-    protected function guard($value)
+    protected function guard(mixed $value): bool
     {
         $filteredValue = filter_var($value, FILTER_VALIDATE_INT);
 

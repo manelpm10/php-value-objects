@@ -8,7 +8,7 @@ use Exception;
 
 final class InvalidCollectionTypeException extends Exception
 {
-    public function __construct($actual, string $expected)
+    public function __construct(mixed $actual, string $expected)
     {
         parent::__construct(
             sprintf('"%s" is not a valid object for collection. Expected "%s"', get_class($actual), $expected)

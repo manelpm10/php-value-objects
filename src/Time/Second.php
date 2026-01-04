@@ -11,13 +11,9 @@ class Second extends AbstractValueObject
     const MAX_SECOND = 59;
 
     /**
-     * Guard that value object is valid.
-     *
-     * @param string $value
-     * @return boolean
      * @throws SecondInvalidException
      */
-    protected function guard($value)
+    protected function guard(mixed $value): bool
     {
         $filteredValue = filter_var($value, FILTER_VALIDATE_INT);
 

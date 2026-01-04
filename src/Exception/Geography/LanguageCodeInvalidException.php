@@ -7,10 +7,7 @@ namespace ValueObjects\Exception\Geography;
  */
 final class LanguageCodeInvalidException extends \InvalidArgumentException
 {
-    /**
-     * @param mixed $value
-     */
-    public function __construct($value)
+    public function __construct(mixed $value)
     {
         parent::__construct(sprintf('Invalid language code value <%s>', $value));
 

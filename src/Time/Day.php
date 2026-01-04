@@ -11,13 +11,9 @@ class Day extends AbstractValueObject
     const MAX_DAY = 31;
 
     /**
-     * Guard that value object is valid.
-     *
-     * @param string $value
-     * @return boolean
      * @throws DayInvalidException
      */
-    protected function guard($value)
+    protected function guard(mixed $value): bool
     {
         if ($value < self::MIN_DAY || $value > self::MAX_DAY) {
             throw new DayInvalidException($value);

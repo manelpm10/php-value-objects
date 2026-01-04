@@ -4,10 +4,7 @@ namespace ValueObjects\Exception\Web;
 
 final class EmailAddressInvalidException extends \InvalidArgumentException
 {
-    /**
-     * @param mixed $value
-     */
-    public function __construct($value)
+    public function __construct(mixed $value)
     {
         parent::__construct(sprintf('Invalid Email address value <%s>', $value));
 

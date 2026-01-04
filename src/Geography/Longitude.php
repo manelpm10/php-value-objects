@@ -11,13 +11,9 @@ class Longitude extends AbstractValueObject
     const MAX_LONGITUDE = 180;
 
     /**
-     * Guard that value object is valid.
-     *
-     * @param mixed $value
-     * @return boolean
      * @throws LongitudeInvalidException
      */
-    protected function guard($value)
+    protected function guard(mixed $value): bool
     {
         $filteredValue = filter_var($value, FILTER_VALIDATE_FLOAT);
 
@@ -29,13 +25,7 @@ class Longitude extends AbstractValueObject
         return true;
     }
 
-    /**
-     * Convert the valid longitude (string, int...) to native float.
-     *
-     * @param mixed $value
-     * @return float
-     */
-    protected function normalizeValue($value)
+    protected function normalizeValue(mixed $value): mixed
     {
         return $value + 0;
     }

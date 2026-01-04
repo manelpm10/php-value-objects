@@ -7,31 +7,22 @@ use ValueObjects\Exception\Time\DateInvalidException;
 
 class Date extends AbstractValueObject
 {
-    private $format;
-    private $year;
-    private $month;
-    private $day;
+    private string $format;
+    private Year $year;
+    private Month $month;
+    private Day $day;
 
-    /**
-     * AbstractValueObject constructor.
-     *
-     * @param string $value
-     * @param string $format
-     */
-    public function __construct($value, string $format = 'Y-m-d')
+    public function __construct(string $value, string $format = 'Y-m-d')
     {
         $this->format = $format;
+
         parent::__construct($value);
     }
 
     /**
-     * Guard that value object is valid.
-     *
-     * @param string $value
-     * @return boolean
      * @throws DateInvalidException
      */
-    protected function guard($value)
+    protected function guard(mixed $value): bool
     {
         $date = date_parse_from_format($this->format, $value);
         if (!empty($date['warning_count']) || !empty($date['error_count'])) {
@@ -111,7 +102,7 @@ class Date extends AbstractValueObject
         return new static(date($format), $format);
     }
 
-    protected function normalizeValue($value): string
+    protected function normalizeValue(mixed $value): string
     {
         return date($this->format, mktime(0, 0, 0, $this->month->value(), $this->day->value(), $this->year->value()));
     }

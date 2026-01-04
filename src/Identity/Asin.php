@@ -8,13 +8,9 @@ use ValueObjects\Exception\Identity\AsinInvalidException;
 class Asin extends AbstractValueObject
 {
     /**
-     * Guard that value object is valid.
-     *
-     * @param string $value
-     * @return boolean
      * @throws AsinInvalidException
      */
-    protected function guard($value)
+    protected function guard(mixed $value): bool
     {
         if (!preg_match('@^[A-Z0-9]{10}$@', $value)){
             throw new AsinInvalidException($value);

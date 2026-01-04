@@ -4,10 +4,7 @@ namespace ValueObjects\Exception\Time;
 
 final class SecondInvalidException extends \InvalidArgumentException
 {
-    /**
-     * @param mixed $value
-     */
-    public function __construct($value)
+    public function __construct(mixed $value)
     {
         parent::__construct(sprintf('Invalid second value <%s>', $value));
 

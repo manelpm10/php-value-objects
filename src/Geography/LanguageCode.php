@@ -10,13 +10,9 @@ use ValueObjects\Exception\Geography\LanguageCodeInvalidException;
 class LanguageCode extends AbstractValueObject
 {
     /**
-     * Guard that value object is valid.
-     *
-     * @param string $value
-     * @return boolean
      * @throws LanguageCodeInvalidException
      */
-    protected function guard($value)
+    protected function guard(mixed $value): bool
     {
         try {
             Languages::getName($value);

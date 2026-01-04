@@ -11,7 +11,10 @@ use ValueObjects\Exception\Geography\LocaleInvalidException;
 
 class Locale extends AbstractValueObject
 {
-    protected function guard($value): bool
+    /**
+     * @throws LocaleInvalidException
+     */
+    protected function guard(mixed $value): bool
     {
         try {
             Locales::getName($value);

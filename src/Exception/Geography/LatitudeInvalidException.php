@@ -7,10 +7,7 @@ namespace ValueObjects\Exception\Geography;
  */
 final class LatitudeInvalidException extends \InvalidArgumentException
 {
-    /**
-     * @param mixed $value
-     */
-    public function __construct($value)
+    public function __construct(mixed $value)
     {
         parent::__construct(sprintf('Invalid latitude value <%s>', $value));
 

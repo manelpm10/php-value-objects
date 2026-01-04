@@ -9,13 +9,9 @@ use ValueObjects\Number\Natural;
 class Year extends Natural
 {
     /**
-     * Guard that value object is valid.
-     *
-     * @param string $value
-     * @return boolean
      * @throws YearInvalidException
      */
-    protected function guard($value)
+    protected function guard(mixed $value): bool
     {
         try {
             parent::guard($value);

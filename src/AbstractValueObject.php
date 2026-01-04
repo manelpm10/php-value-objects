@@ -4,17 +4,9 @@ namespace ValueObjects;
 
 abstract class AbstractValueObject
 {
-    /**
-     * @var mixed $value
-     */
-    protected $value;
+    protected mixed $value;
 
-    /**
-     * AbstractValueObject constructor.
-     *
-     * @param mixed $value
-     */
-    public function __construct($value)
+    public function __construct(mixed $value)
     {
         if (($this instanceof InterfaceNullable && is_null($value)) || $this->guard($value)) {
             $this->value = (is_null($value))? null : $this->normalizeValue($value);
@@ -24,23 +16,12 @@ abstract class AbstractValueObject
         throw new \InvalidArgumentException(sprintf('Argument "%s" is invalid.', $value));
     }
 
-    /**
-     * Normalize the value.
-     *
-     * @param mixed $value
-     * @return mixed
-     */
-    protected function normalizeValue($value)
+    protected function normalizeValue(mixed $value): mixed
     {
         return $value;
     }
 
-    /**
-     * Return value.
-     *
-     * @return mixed
-     */
-    public function value()
+    public function value(): mixed
     {
         return $this->value;
     }
@@ -50,9 +31,9 @@ abstract class AbstractValueObject
      *
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
-        return ''.$this->value;
+        return '' . $this->value;
     }
 
     /**
@@ -61,9 +42,9 @@ abstract class AbstractValueObject
      * @param mixed $value
      * @return boolean
      */
-    protected abstract function guard($value);
+    protected abstract function guard(mixed $value): bool;
 
-    public function equals($other)
+    public function equals($other): bool
     {
         return get_class($this) === get_class($other) && $this->value === $other->value;
     }

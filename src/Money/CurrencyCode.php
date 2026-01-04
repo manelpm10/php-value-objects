@@ -10,13 +10,9 @@ use ValueObjects\Exception\Money\CurrencyCodeInvalidException;
 class CurrencyCode extends AbstractValueObject
 {
     /**
-     * Guard that value object is valid.
-     *
-     * @param string $value
-     * @return boolean
      * @throws CurrencyCodeInvalidException
      */
-    protected function guard($value)
+    protected function guard(mixed $value): bool
     {
         $value = $this->normalizeValue($value);
         try {
@@ -28,13 +24,7 @@ class CurrencyCode extends AbstractValueObject
         return true;
     }
 
-    /**
-     * Convert the lower case country code to upper case.
-     *
-     * @param string $value
-     * @return string
-     */
-    protected function normalizeValue($value): string
+    protected function normalizeValue(mixed $value): string
     {
         return strtoupper($value);
     }

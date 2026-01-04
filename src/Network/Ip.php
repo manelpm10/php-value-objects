@@ -11,13 +11,9 @@ class Ip extends AbstractValueObject
     const IPV6 = 'IPv6';
 
     /**
-     * Guard that value object is valid.
-     *
-     * @param integer $value
-     * @return boolean
      * @throws IpInvalidException
      */
-    protected function guard($value)
+    protected function guard(mixed $value): bool
     {
         $filteredValue = filter_var($value, FILTER_VALIDATE_IP);
         if ($filteredValue === false) {

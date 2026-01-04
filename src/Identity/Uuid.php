@@ -9,13 +9,9 @@ use ValueObjects\Exception\Identity\UuidInvalidException;
 class Uuid extends AbstractValueObject
 {
     /**
-     * Guard that value object is valid.
-     *
-     * @param string $value
-     * @return boolean
      * @throws UuidInvalidException
      */
-    protected function guard($value)
+    protected function guard(mixed $value): bool
     {
         if (!$value || !BaseUuid::isValid($value)){
             throw new UuidInvalidException($value);

@@ -8,13 +8,9 @@ use ValueObjects\Exception\Number\IntegerInvalidException;
 class Integer extends AbstractValueObject
 {
     /**
-     * Guard that value object is valid.
-     *
-     * @param integer $value
-     * @return boolean
      * @throws IntegerInvalidException
      */
-    protected function guard($value)
+    protected function guard(mixed $value): bool
     {
         $filteredValue = filter_var($value, FILTER_VALIDATE_INT);
 
@@ -26,13 +22,7 @@ class Integer extends AbstractValueObject
         return true;
     }
 
-    /**
-     * Convert the valid integer (string, int...) to native integer.
-     *
-     * @param mixed $value
-     * @return int
-     */
-    protected function normalizeValue($value): int
+    protected function normalizeValue(mixed $value): int
     {
         return $value + 0;
     }

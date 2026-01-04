@@ -11,13 +11,9 @@ class Latitude extends AbstractValueObject
     const MAX_LATITUDE = 90;
 
     /**
-     * Guard that value object is valid.
-     *
-     * @param string $value
-     * @return boolean
      * @throws LatitudeInvalidException
      */
-    protected function guard($value)
+    protected function guard(mixed $value): bool
     {
         $filteredValue = filter_var($value, FILTER_VALIDATE_FLOAT);
 
@@ -29,13 +25,7 @@ class Latitude extends AbstractValueObject
         return true;
     }
 
-    /**
-     * Convert the valid latitude (string, int...) to native float.
-     *
-     * @param mixed $value
-     * @return float
-     */
-    protected function normalizeValue($value)
+    protected function normalizeValue(mixed $value): mixed
     {
         return $value + 0;
     }

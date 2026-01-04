@@ -8,13 +8,9 @@ use ValueObjects\Exception\String\StringInvalidException;
 class StringLiteral extends AbstractValueObject
 {
     /**
-     * Guard that value object is valid.
-     *
-     * @param string $value
-     * @return boolean
      * @throws StringInvalidException
      */
-    protected function guard($value)
+    protected function guard(mixed $value): bool
     {
         if (false === is_string($value)){
             throw new StringInvalidException($value);

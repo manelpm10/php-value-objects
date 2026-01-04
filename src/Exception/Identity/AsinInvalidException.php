@@ -7,10 +7,7 @@ namespace ValueObjects\Exception\Identity;
  */
 final class AsinInvalidException extends \InvalidArgumentException
 {
-    /**
-     * @param mixed $value
-     */
-    public function __construct($value)
+    public function __construct(mixed $value)
     {
         parent::__construct(sprintf('Invalid ASIN value <%s>', $value));
 

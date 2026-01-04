@@ -10,13 +10,9 @@ use ValueObjects\Exception\Boolean\BooleanInvalidException;
 class Boolean extends AbstractValueObject
 {
     /**
-     * Guard that value object is valid.
-     *
-     * @param boolean $value
-     * @return boolean
      * @throws BooleanInvalidException
      */
-    protected function guard($value)
+    protected function guard(mixed $value): bool
     {
         if ($value !== true && $value !== false) {
             throw new BooleanInvalidException($value);

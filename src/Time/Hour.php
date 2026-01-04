@@ -11,13 +11,9 @@ class Hour extends AbstractValueObject
     const MAX_HOUR = 23;
 
     /**
-     * Guard that value object is valid.
-     *
-     * @param string $value
-     * @return boolean
      * @throws HourInvalidException
      */
-    protected function guard($value)
+    protected function guard(mixed $value): bool
     {
         $filteredValue = filter_var($value, FILTER_VALIDATE_INT);
 
@@ -29,13 +25,7 @@ class Hour extends AbstractValueObject
         return true;
     }
 
-    /**
-     * Convert the valid natural number (string, int, float...) to native float.
-     *
-     * @param mixed $value
-     * @return int
-     */
-    protected function normalizeValue($value): int
+    protected function normalizeValue(mixed $value): int
     {
         return $value + 0;
     }

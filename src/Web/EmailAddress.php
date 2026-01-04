@@ -7,7 +7,10 @@ use ValueObjects\Exception\Web\EmailAddressInvalidException;
 
 class EmailAddress extends AbstractValueObject
 {
-    protected function guard($value)
+    /**
+     * @throws EmailAddressInvalidException
+     */
+    protected function guard(mixed $value): bool
     {
         if (false === filter_var($value, FILTER_VALIDATE_EMAIL)) {
             throw new EmailAddressInvalidException($value);

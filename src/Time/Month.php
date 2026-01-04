@@ -11,13 +11,9 @@ class Month extends AbstractValueObject
     const MAX_MONTH = 12;
 
     /**
-     * Guard that value object is valid.
-     *
-     * @param string $value
-     * @return boolean
      * @throws MonthInvalidException
      */
-    protected function guard($value)
+    protected function guard(mixed $value): bool
     {
         if ($value < self::MIN_MONTH || $value > self::MAX_MONTH) {
             throw new MonthInvalidException($value);
