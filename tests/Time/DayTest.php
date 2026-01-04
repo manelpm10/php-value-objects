@@ -2,21 +2,22 @@
 
 namespace ValueObjects\Tests\Time;
 
+use PHPUnit\Framework\TestCase;
 use ValueObjects\Exception\Time\DayInvalidException;
 use ValueObjects\Time\Day;
 
-class DayTest extends \PHPUnit_Framework_TestCase
+class DayTest extends TestCase
 {
     /**
      * @dataProvider validValuesProvider
      */
-    public function testValidValues($value)
+    public function testValidValues($value): void
     {
         $valueObject = new Day($value);
         $this->assertSame($value, $valueObject->value());
     }
 
-    public function validValuesProvider()
+    public static function validValuesProvider(): array
     {
         return array(
             'Day 1 is valid' => [1],
@@ -28,13 +29,13 @@ class DayTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider notValidValuesProvider
      */
-    public function testNotValidValues($value)
+    public function testNotValidValues($value): void
     {
-        $this->setExpectedException(DayInvalidException::class);
+        $this->expectException(DayInvalidException::class);
         new Day($value);
     }
 
-    public function notValidValuesProvider()
+    public static function notValidValuesProvider(): array
     {
         return array(
             'Negative days are not valid' => [-1],

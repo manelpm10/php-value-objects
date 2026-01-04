@@ -2,21 +2,22 @@
 
 namespace ValueObjects\Tests\Time;
 
+use PHPUnit\Framework\TestCase;
 use ValueObjects\Exception\Time\SecondInvalidException;
 use ValueObjects\Time\Second;
 
-class SecondTest extends \PHPUnit_Framework_TestCase
+class SecondTest extends TestCase
 {
     /**
      * @dataProvider validValuesProvider
      */
-    public function testValidValues($value)
+    public function testValidValues($value): void
     {
         $valueObject = new Second($value);
         $this->assertSame($value, $valueObject->value());
     }
 
-    public function validValuesProvider()
+    public static function validValuesProvider(): array
     {
         return array(
             'Second 1 is valid' => [1],
@@ -28,13 +29,13 @@ class SecondTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider notValidValuesProvider
      */
-    public function testNotValidValues($value)
+    public function testNotValidValues($value): void
     {
-        $this->setExpectedException(SecondInvalidException::class);
+        $this->expectException(SecondInvalidException::class);
         new Second($value);
     }
 
-    public function notValidValuesProvider()
+    public static function notValidValuesProvider(): array
     {
         return array(
             'Negative seconds are not valid' => [-1],

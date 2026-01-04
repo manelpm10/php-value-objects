@@ -2,7 +2,8 @@
 
 namespace ValueObjects\Money;
 
-use Symfony\Component\Intl\Intl;
+use Symfony\Component\Intl\Currencies;
+use Throwable;
 use ValueObjects\AbstractValueObject;
 use ValueObjects\Exception\Money\CurrencyCodeInvalidException;
 
@@ -18,8 +19,9 @@ class CurrencyCode extends AbstractValueObject
     protected function guard($value)
     {
         $value = $this->normalizeValue($value);
-        $currencyName = Intl::getCurrencyBundle()->getCurrencyName($value);
-        if (null === $currencyName) {
+        try {
+            Currencies::getName($value);
+        } catch(Throwable $e) {
             throw new CurrencyCodeInvalidException($value);
         }
 
@@ -32,7 +34,7 @@ class CurrencyCode extends AbstractValueObject
      * @param string $value
      * @return string
      */
-    protected function normalizeValue($value)
+    protected function normalizeValue($value): string
     {
         return strtoupper($value);
     }

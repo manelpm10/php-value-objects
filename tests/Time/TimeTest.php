@@ -2,21 +2,22 @@
 
 namespace ValueObjects\Tests\Time;
 
+use PHPUnit\Framework\TestCase;
 use ValueObjects\Exception\Time\TimeInvalidException;
 use ValueObjects\Time\Time;
 
-class TimeTest extends \PHPUnit_Framework_TestCase
+class TimeTest extends TestCase
 {
     /**
      * @dataProvider validValuesProvider
      */
-    public function testValidValues($value, $format)
+    public function testValidValues($value, $format): void
     {
         $valueObject = new Time($value, $format);
         $this->assertSame($value, $valueObject->value());
     }
 
-    public function validValuesProvider()
+    public static function validValuesProvider(): array
     {
         return array(
             'Time "23:59:59" is valid' => ['23:59:59', 'H:i:s'],
@@ -25,14 +26,14 @@ class TimeTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    public function testDefaultFormat()
+    public function testDefaultFormat(): void
     {
         $value = '10:25:32';
         $valueObject = new Time($value);
         $this->assertSame($value, $valueObject->value());
     }
 
-    public function testNowTime()
+    public function testNowTime(): void
     {
         $format = 'H:i:s';
         $now = date($format);
@@ -42,13 +43,13 @@ class TimeTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider notValidValuesProvider
      */
-    public function testNotValidValues($value, $format)
+    public function testNotValidValues($value, $format): void
     {
-        $this->setExpectedException(TimeInvalidException::class);
+        $this->expectException(TimeInvalidException::class);
         new Time($value, $format);
     }
 
-    public function notValidValuesProvider()
+    public static function notValidValuesProvider(): array
     {
         return array(
             'Time with hour out for range is not valid' => ['24:00:00', 'H:i:s'],

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace ValueObjects\Geography;
 
-use Symfony\Component\Intl\Exception\MissingResourceException;
-use Symfony\Component\Intl\Intl;
+use Symfony\Component\Intl\Locales;
+use Throwable;
 use ValueObjects\AbstractValueObject;
 use ValueObjects\Exception\Geography\LocaleInvalidException;
 
@@ -13,11 +13,12 @@ class Locale extends AbstractValueObject
 {
     protected function guard($value): bool
     {
-        $localeName = Intl::getLocaleBundle()->getLocaleName($value);
-        if ($localeName) {
-            return true;
+        try {
+            Locales::getName($value);
+        } catch (Throwable $throwable) {
+            throw new LocaleInvalidException($value);
         }
 
-        throw new LocaleInvalidException($value);
+        return true;
     }
 }

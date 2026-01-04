@@ -2,21 +2,22 @@
 
 namespace ValueObjects\Tests\Geography;
 
+use PHPUnit\Framework\TestCase;
 use ValueObjects\Exception\Geography\LongitudeInvalidException;
 use ValueObjects\Geography\Longitude;
 
-class LongitudeTest extends \PHPUnit_Framework_TestCase
+class LongitudeTest extends TestCase
 {
     /**
      * @dataProvider validValuesProvider
      */
-    public function testValidValues($value)
+    public function testValidValues($value): void
     {
         $valueObject = new Longitude($value);
         $this->assertSame($value + 0, $valueObject->value());
     }
 
-    public function validValuesProvider()
+    public static function validValuesProvider(): array
     {
         return array(
             'Integer 0 is a valid longitude value' => [0],
@@ -34,13 +35,13 @@ class LongitudeTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider notValidValuesProvider
      */
-    public function testNotValidValues($value)
+    public function testNotValidValues($value): void
     {
-        $this->setExpectedException(LongitudeInvalidException::class);
+        $this->expectException(LongitudeInvalidException::class);
         new Longitude($value);
     }
 
-    public function notValidValuesProvider()
+    public static function notValidValuesProvider(): array
     {
         return array(
             'Integer bigger than 90 is not a valid longitude value' => [181],

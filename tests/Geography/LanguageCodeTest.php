@@ -2,21 +2,22 @@
 
 namespace ValueObjects\Tests\Geography;
 
+use PHPUnit\Framework\TestCase;
 use ValueObjects\Exception\Geography\LanguageCodeInvalidException;
 use ValueObjects\Geography\LanguageCode;
 
-class LanguageCodeTest extends \PHPUnit_Framework_TestCase
+class LanguageCodeTest extends TestCase
 {
     /**
      * @dataProvider validValuesProvider
      */
-    public function testValidValues($value)
+    public function testValidValues($value): void
     {
         $valueObject = new LanguageCode($value);
         $this->assertSame($value, $valueObject->value());
     }
 
-    public function validValuesProvider()
+    public static function validValuesProvider(): array
     {
         return array(
             'Lower case language code for spanish is valid' => ['es'],
@@ -27,13 +28,13 @@ class LanguageCodeTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider notValidValuesProvider
      */
-    public function testNotValidValues($value)
+    public function testNotValidValues($value): void
     {
-        $this->setExpectedException(LanguageCodeInvalidException::class);
+        $this->expectException(LanguageCodeInvalidException::class);
         new LanguageCode($value);
     }
 
-    public function notValidValuesProvider()
+    public static function notValidValuesProvider(): array
     {
         return array(
             '56 is not a valid language code' => ['56'],

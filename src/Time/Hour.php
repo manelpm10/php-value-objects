@@ -35,7 +35,7 @@ class Hour extends AbstractValueObject
      * @param mixed $value
      * @return int
      */
-    protected function normalizeValue($value)
+    protected function normalizeValue($value): int
     {
         return $value + 0;
     }

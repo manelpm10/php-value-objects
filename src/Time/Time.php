@@ -101,8 +101,8 @@ class Time extends AbstractValueObject
      * @param mixed $value
      * @return mixed
      */
-    protected function normalizeValue($value)
+    protected function normalizeValue($value): string
     {
-        return ''.date($this->format, mktime($this->hour->value(), $this->minute->value(), $this->second->value()));
+        return date($this->format, mktime($this->hour->value(), $this->minute->value(), $this->second->value()));
     }
 }

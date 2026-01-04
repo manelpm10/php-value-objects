@@ -2,21 +2,22 @@
 
 namespace ValueObjects\Tests\Number;
 
+use PHPUnit\Framework\TestCase;
 use ValueObjects\Exception\Number\IntegerInvalidException;
 use ValueObjects\Number\Integer;
 
-class IntegerTest extends \PHPUnit_Framework_TestCase
+class IntegerTest extends TestCase
 {
     /**
      * @dataProvider validValuesProvider
      */
-    public function testValidValues($value)
+    public function testValidValues($value): void
     {
         $valueObject = new Integer($value);
         $this->assertSame(intval($value), $valueObject->value());
     }
 
-    public function validValuesProvider()
+    public static function validValuesProvider(): array
     {
         return array(
             'Integer 0 is a valid value' => [0],
@@ -30,13 +31,13 @@ class IntegerTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider notValidValuesProvider
      */
-    public function testNotValidValues($value)
+    public function testNotValidValues($value): void
     {
-        $this->setExpectedException(IntegerInvalidException::class);
+        $this->expectException(IntegerInvalidException::class);
         new Integer($value);
     }
 
-    public function notValidValuesProvider()
+    public static function notValidValuesProvider(): array
     {
         return array(
             'Float is not a valid integer' => [0.5],

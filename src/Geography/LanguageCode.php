@@ -2,9 +2,10 @@
 
 namespace ValueObjects\Geography;
 
+use Symfony\Component\Intl\Languages;
+use Throwable;
 use ValueObjects\AbstractValueObject;
 use ValueObjects\Exception\Geography\LanguageCodeInvalidException;
-use Symfony\Component\Intl\Intl;
 
 class LanguageCode extends AbstractValueObject
 {
@@ -17,8 +18,9 @@ class LanguageCode extends AbstractValueObject
      */
     protected function guard($value)
     {
-        $languageName = Intl::getLanguageBundle()->getLanguageName($value);
-        if (null === $languageName) {
+        try {
+            Languages::getName($value);
+        } catch(Throwable $e) {
             throw new LanguageCodeInvalidException($value);
         }
 

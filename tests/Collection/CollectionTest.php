@@ -2,9 +2,11 @@
 
 namespace ValueObjects\Tests\Collection;
 
-class CollectionTest extends \PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+class CollectionTest extends TestCase
 {
-    public function testCountElements()
+    public function testCountElements(): void
     {
         $array = [
             new DummyObject('Object 1'),
@@ -16,7 +18,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(3, $dummyObjectCollection->count());
     }
 
-    public function testEmptyCollection()
+    public function testEmptyCollection(): void
     {
         $dummyObjectCollection = new DummyObjectCollection([]);
         $this->assertTrue($dummyObjectCollection->isEmpty());
@@ -25,14 +27,14 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($dummyObjectCollection->isEmpty());
     }
 
-    public function testCreateEmptyCollection()
+    public function testCreateEmptyCollection(): void
     {
         $collection = DummyObjectCollection::createEmpty();
 
         $this->assertTrue($collection->isEmpty());
     }
 
-    public function testAddElementsToCollection()
+    public function testAddElementsToCollection(): void
     {
         $collection = DummyObjectCollection::createEmpty();
 
@@ -44,7 +46,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($numElements, $collection->count());
     }
 
-    public function testExtractElementsFromCollection()
+    public function testExtractElementsFromCollection(): void
     {
         $array = [
             new DummyObject('Object 1'),
@@ -58,7 +60,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(3, $newCollection->count());
     }
 
-    public function testEach()
+    public function testEach(): void
     {
         $array = [
             new DummyObject('Object 0'),
@@ -72,7 +74,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
         });
     }
 
-    public function testAll()
+    public function testAll(): void
     {
         $array = [
             new DummyObject('Object 0'),
@@ -88,7 +90,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($result);
     }
 
-    public function testSort()
+    public function testSort(): void
     {
         $array = [
             new DummyObject('Object 1'),
@@ -105,7 +107,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Object 1', $sortedCollection->last()->value());
     }
 
-    public function testReduce()
+    public function testReduce(): void
     {
         $array = [
             new DummyObject('1'),

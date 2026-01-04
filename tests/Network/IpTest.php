@@ -2,28 +2,29 @@
 
 namespace ValueObjects\Tests\Network;
 
+use PHPUnit\Framework\TestCase;
 use ValueObjects\Network\Ip;
 
-class IpTest extends \PHPUnit_Framework_TestCase
+class IpTest extends TestCase
 {
     /**
      * @dataProvider validIpV4ValuesProvider
      */
-    public function testValidIpV4Values($value)
+    public function testValidIpV4Values($value): void
     {
         $valueObject = new Ip($value);
         $this->assertEquals(Ip::IPV4, $valueObject->getVersion());
     }
 
-    public function validIpV4ValuesProvider()
+    public static function validIpV4ValuesProvider(): array
     {
         return array(
             'Current network is a valid IPv4' => ['0.0.0.0'],
             'Private network is a valid IPv4' => ['10.0.0.0'],
+            'Private network is a valid IPv4 with 172.xxx.xxx.xxx' => ['172.16.0.0'],
             'Shared Address Space is a valid IPv4' => ['100.64.0.0'],
             'Loopback is a valid IPv4' => ['127.0.0.0'],
             'Link-local is a valid IPv4' => ['169.254.0.0'],
-            'Private network is a valid IPv4' => ['172.16.0.0'],
             'IP multicast is a valid IPv4' => ['224.0.0.0'],
             'Reserved range is a valid IPv4' => ['240.0.0.0'],
             'Broadcast is a valid IPv4' => ['255.255.255.255'],
@@ -33,13 +34,13 @@ class IpTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider validIpV6ValuesProvider
      */
-    public function testValidIpV6Values($value)
+    public function testValidIpV6Values($value): void
     {
         $valueObject = new Ip($value);
         $this->assertEquals(Ip::IPV6, $valueObject->getVersion());
     }
 
-    public function validIpV6ValuesProvider()
+    public static function validIpV6ValuesProvider(): array
     {
         return array(
             'Current network is a valid IPv6' => ['::'],
@@ -48,5 +49,4 @@ class IpTest extends \PHPUnit_Framework_TestCase
             'Long IPv6 valid' => ['2001:db8:3c4d:0015:0000:0000:1a2f:1a2b'],
         );
     }
-
 }

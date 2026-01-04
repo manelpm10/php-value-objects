@@ -2,21 +2,22 @@
 
 namespace ValueObjects\Tests\Time;
 
+use PHPUnit\Framework\TestCase;
 use ValueObjects\Exception\Time\DateTimeInvalidException;
 use ValueObjects\Time\DateTime;
 
-class DateTimeTest extends \PHPUnit_Framework_TestCase
+class DateTimeTest extends TestCase
 {
     /**
      * @dataProvider validValuesProvider
      */
-    public function testValidValues($value, $format, $expected)
+    public function testValidValues($value, $format, $expected): void
     {
         $valueObject = new DateTime($value, $format);
         $this->assertSame($expected, $valueObject->value());
     }
 
-    public function validValuesProvider()
+    public static function validValuesProvider(): array
     {
         return array(
             'DateTime "2007-12-31 23:59:59" is valid' => ['2007-12-31 23:59:59', 'Y-m-d H:i:s', '2007-12-31 23:59:59'],
@@ -26,14 +27,14 @@ class DateTimeTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    public function testDefaultFormat()
+    public function testDefaultFormat(): void
     {
         $value = '2012-12-31 12:25:32';
         $valueObject = new DateTime($value);
         $this->assertSame($value, $valueObject->value());
     }
 
-    public function testNowDateTime()
+    public function testNowDateTime(): void
     {
         $format = 'Y_d_m H-i-s';
         $now = date($format);
@@ -43,13 +44,13 @@ class DateTimeTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider notValidValuesProvider
      */
-    public function testNotValidValues($value, $format)
+    public function testNotValidValues($value, $format): void
     {
-        $this->setExpectedException(DateTimeInvalidException::class);
+        $this->expectException(DateTimeInvalidException::class);
         new DateTime($value, $format);
     }
 
-    public function notValidValuesProvider()
+    public static function notValidValuesProvider(): array
     {
         return array(
             'DateTime with day out for range is not valid' => ['2007-11-31 00:00:00', 'Y-m-d H:i:s'],
@@ -58,7 +59,7 @@ class DateTimeTest extends \PHPUnit_Framework_TestCase
             'DateTime with minute out for range is not valid' => ['2007-13-31 00:60:00', 'Y-m-d H:i:s'],
             'DateTime with second out for range is not valid' => ['2007-13-31 00:00:60', 'Y-m-d H:i:s'],
             'DateTime not according with format is not valid' => ['2007_12_31 00:00:00', 'Y-m-d H_i_s'],
-            '29 of febrary for not leap-year is not valid' => ['2019-02-29 00:00:00', 'Y-m-d H:i:s']
+            '29 of February for not leap-year is not valid' => ['2019-02-29 00:00:00', 'Y-m-d H:i:s']
         );
     }
 }

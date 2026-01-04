@@ -2,9 +2,10 @@
 
 namespace ValueObjects\Geography;
 
+use Symfony\Component\Intl\Countries;
+use Throwable;
 use ValueObjects\AbstractValueObject;
 use ValueObjects\Exception\Geography\CountryCodeInvalidException;
-use Symfony\Component\Intl\Intl;
 
 class CountryCode extends AbstractValueObject
 {
@@ -18,8 +19,9 @@ class CountryCode extends AbstractValueObject
     protected function guard($value)
     {
         $value = $this->normalizeValue($value);
-        $countryName = Intl::getRegionBundle()->getCountryName($value);
-        if (null === $countryName) {
+        try {
+            Countries::getName($value);
+        } catch (Throwable $e) {
             throw new CountryCodeInvalidException($value);
         }
 
@@ -32,7 +34,7 @@ class CountryCode extends AbstractValueObject
      * @param string $value
      * @return string
      */
-    protected function normalizeValue($value)
+    protected function normalizeValue($value): string
     {
         return strtoupper($value);
     }

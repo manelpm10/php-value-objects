@@ -2,21 +2,22 @@
 
 namespace ValueObjects\Tests\Geography;
 
+use PHPUnit\Framework\TestCase;
 use ValueObjects\Exception\Geography\LocaleInvalidException;
 use ValueObjects\Geography\Locale;
 
-class LocaleTest extends \PHPUnit_Framework_TestCase
+class LocaleTest extends TestCase
 {
     /**
      * @dataProvider validValuesProvider
      */
-    public function testValidValues($value)
+    public function testValidValues($value): void
     {
         $valueObject = new Locale($value);
         $this->assertSame($value, $valueObject->value());
     }
 
-    public function validValuesProvider()
+    public static function validValuesProvider(): array
     {
         return array(
             'Spanish language is valid' => ['es'],
@@ -29,13 +30,13 @@ class LocaleTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider notValidValuesProvider
      */
-    public function testNotValidValues($value)
+    public function testNotValidValues($value): void
     {
-        $this->setExpectedException(LocaleInvalidException::class);
+        $this->expectException(LocaleInvalidException::class);
         new Locale($value);
     }
 
-    public function notValidValuesProvider()
+    public static function notValidValuesProvider(): array
     {
         return array(
             '56 is not a valid language code' => ['56'],

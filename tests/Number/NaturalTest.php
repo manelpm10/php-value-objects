@@ -2,21 +2,22 @@
 
 namespace ValueObjects\Tests\Number;
 
+use PHPUnit\Framework\TestCase;
 use ValueObjects\Exception\Number\NaturalInvalidException;
 use ValueObjects\Number\Natural;
 
-class NaturalTest extends \PHPUnit_Framework_TestCase
+class NaturalTest extends TestCase
 {
     /**
      * @dataProvider validValuesProvider
      */
-    public function testValidValues($value)
+    public function testValidValues($value): void
     {
         $valueObject = new Natural($value);
         $this->assertSame(intval($value), $valueObject->value());
     }
 
-    public function validValuesProvider()
+    public static function validValuesProvider(): array
     {
         return array(
             'Integer bigger than 0 is a valid value' => [5],
@@ -27,13 +28,13 @@ class NaturalTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider notValidValuesProvider
      */
-    public function testNotValidValues($value)
+    public function testNotValidValues($value): void
     {
-        $this->setExpectedException(NaturalInvalidException::class);
+        $this->expectException(NaturalInvalidException::class);
         new Natural($value);
     }
 
-    public function notValidValuesProvider()
+    public static function notValidValuesProvider(): array
     {
         return array(
             'Integer 0 is not a valid natural value' => [0],

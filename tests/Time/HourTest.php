@@ -2,21 +2,22 @@
 
 namespace ValueObjects\Tests\Time;
 
+use PHPUnit\Framework\TestCase;
 use ValueObjects\Exception\Time\HourInvalidException;
 use ValueObjects\Time\Hour;
 
-class HourTest extends \PHPUnit_Framework_TestCase
+class HourTest extends TestCase
 {
     /**
      * @dataProvider validValuesProvider
      */
-    public function testValidValues($value)
+    public function testValidValues($value): void
     {
         $valueObject = new Hour($value);
         $this->assertEquals($value, $valueObject->value());
     }
 
-    public function validValuesProvider()
+    public static function validValuesProvider(): array
     {
         return array(
 //            'Hour 0 is valid' => [1],
@@ -28,13 +29,13 @@ class HourTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider notValidValuesProvider
      */
-    public function testNotValidValues($value)
+    public function testNotValidValues($value): void
     {
-        $this->setExpectedException(HourInvalidException::class);
+        $this->expectException(HourInvalidException::class);
         new Hour($value);
     }
 
-    public function notValidValuesProvider()
+    public static function notValidValuesProvider(): array
     {
         return array(
             'Negative hours are not valid' => [-1],

@@ -17,7 +17,7 @@ class Uuid extends AbstractValueObject
      */
     protected function guard($value)
     {
-        if (!BaseUuid::isValid($value)){
+        if (!$value || !BaseUuid::isValid($value)){
             throw new UuidInvalidException($value);
         }
 

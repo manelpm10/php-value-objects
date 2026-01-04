@@ -2,21 +2,22 @@
 
 namespace ValueObjects\Tests\Number;
 
+use PHPUnit\Framework\TestCase;
 use ValueObjects\Exception\Number\RealInvalidException;
 use ValueObjects\Number\Real;
 
-class RealTest extends \PHPUnit_Framework_TestCase
+class RealTest extends TestCase
 {
     /**
      * @dataProvider validValuesProvider
      */
-    public function testValidValues($value)
+    public function testValidValues($value): void
     {
         $valueObject = new Real($value);
         $this->assertSame($value + 0, $valueObject->value());
     }
 
-    public function validValuesProvider()
+    public static function validValuesProvider(): array
     {
         return array(
             'Integer 0 is a valid real value' => [0],
@@ -34,13 +35,13 @@ class RealTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider notValidValuesProvider
      */
-    public function testNotValidValues($value)
+    public function testNotValidValues($value): void
     {
-        $this->setExpectedException(RealInvalidException::class);
+        $this->expectException(RealInvalidException::class);
         new Real($value);
     }
 
-    public function notValidValuesProvider()
+    public static function notValidValuesProvider(): array
     {
         return array(
             'Null is not a valid real value' => [null],

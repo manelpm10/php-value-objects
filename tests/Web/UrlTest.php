@@ -2,21 +2,22 @@
 
 namespace ValueObjects\Tests\Web;
 
+use PHPUnit\Framework\TestCase;
 use ValueObjects\Exception\Web\UrlInvalidException;
 use ValueObjects\Web\Url;
 
-class UrlTest extends \PHPUnit_Framework_TestCase
+class UrlTest extends TestCase
 {
     /**
      * @dataProvider validValuesProvider
      */
-    public function testValidValues($value)
+    public function testValidValues($value): void
     {
         $valueObject = new Url($value);
         $this->assertSame($value, $valueObject->value());
     }
 
-    public function validValuesProvider()
+    public static function validValuesProvider(): array
     {
         return array(
             'Http url' => ['http://www.google.com'],
@@ -31,13 +32,13 @@ class UrlTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider notValidValuesProvider
      */
-    public function testNotValidValues($value)
+    public function testNotValidValues($value): void
     {
-        $this->setExpectedException(UrlInvalidException::class);
+        $this->expectException(UrlInvalidException::class);
         new Url($value);
     }
 
-    public function notValidValuesProvider()
+    public static function notValidValuesProvider(): array
     {
         return array(
             'Empty string is not a valid url' => [''],

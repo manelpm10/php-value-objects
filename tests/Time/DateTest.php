@@ -2,21 +2,22 @@
 
 namespace ValueObjects\Tests\Time;
 
+use PHPUnit\Framework\TestCase;
 use ValueObjects\Exception\Time\DateInvalidException;
 use ValueObjects\Time\Date;
 
-class DateTest extends \PHPUnit_Framework_TestCase
+class DateTest extends TestCase
 {
     /**
      * @dataProvider validValuesProvider
      */
-    public function testValidValues($value, $format, $expected)
+    public function testValidValues($value, $format, $expected): void
     {
         $valueObject = new Date($value, $format);
         $this->assertSame($expected, $valueObject->value());
     }
 
-    public function validValuesProvider()
+    public static function validValuesProvider(): array
     {
         return array(
             'Date "2007-12-31" is valid' => ['2007-12-31', 'Y-m-d', '2007-12-31'],
@@ -26,7 +27,7 @@ class DateTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    public function testDefaultFormat()
+    public function testDefaultFormat(): void
     {
         $value = '2012-12-31';
         $valueObject = new Date($value);
@@ -44,7 +45,7 @@ class DateTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $valueObjectOne->equalsTo($valueObjectTwo));
     }
 
-    public function equalsToProvider(): array
+    public static function equalsToProvider(): array
     {
         return [
             'Equal date with same format'         => ['2012-12-01', 'Y-m-d', '2012-12-01', 'Y-m-d', true],
@@ -65,7 +66,7 @@ class DateTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $valueObjectOne->greaterThan($valueObjectTwo));
     }
 
-    public function greaterThanProvider(): array
+    public static function greaterThanProvider(): array
     {
         return [
             'Greater than date with same format'          => ['2013-12-01', 'Y-m-d', '2012-12-01', 'Y-m-d', true],
@@ -88,7 +89,7 @@ class DateTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $valueObjectOne->greaterThanEquals($valueObjectTwo));
     }
 
-    public function greaterThanEqualsProvider(): array
+    public static function greaterThanEqualsProvider(): array
     {
         return [
             'Greater than date with same format'          => ['2013-12-01', 'Y-m-d', '2012-12-01', 'Y-m-d', true],
@@ -111,7 +112,7 @@ class DateTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $valueObjectOne->lowerThan($valueObjectTwo));
     }
 
-    public function lowerThanProvider(): array
+    public static function lowerThanProvider(): array
     {
         return [
             'Lower than date with same format'          => ['2012-12-01', 'Y-m-d', '2013-12-01', 'Y-m-d', true],
@@ -134,7 +135,7 @@ class DateTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $valueObjectOne->lowerThanEquals($valueObjectTwo));
     }
 
-    public function lowerThanEqualsProvider(): array
+    public static function lowerThanEqualsProvider(): array
     {
         return [
             'Lower than date with same format'          => ['2012-12-01', 'Y-m-d', '2013-12-01', 'Y-m-d', true],
@@ -146,7 +147,7 @@ class DateTest extends \PHPUnit_Framework_TestCase
         ];
     }
 
-    public function testNowDate()
+    public function testNowDate(): void
     {
         $format = 'Y_d_m';
         $now = date($format);
@@ -156,20 +157,20 @@ class DateTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider notValidValuesProvider
      */
-    public function testNotValidValues($value, $format)
+    public function testNotValidValues($value, $format): void
     {
-        $this->setExpectedException(DateInvalidException::class);
+        $this->expectException(DateInvalidException::class);
         new Date($value, $format);
     }
 
-    public function notValidValuesProvider()
+    public static function notValidValuesProvider(): array
     {
         return array(
             'Date and time string is not valid' => ['2007-12-31 00:00:00', 'Y-m-d'],
             'Date with day out for range is not valid' => ['2007-11-31', 'Y-m-d'],
             'Date with month out for range is not valid' => ['2007-13-31', 'Y-m-d'],
             'Date not according with format is not valid' => ['2007_12_31', 'Y-m-d'],
-            '29 of febrary for not leap-year is not valid' => ['2019-02-29', 'Y-m-d']
+            '29 of February for not leap-year is not valid' => ['2019-02-29', 'Y-m-d']
         );
     }
 }

@@ -2,21 +2,22 @@
 
 namespace ValueObjects\Tests\Web;
 
+use PHPUnit\Framework\TestCase;
 use ValueObjects\Exception\Web\EmailAddressInvalidException;
 use ValueObjects\Web\EmailAddress;
 
-class EmailAddressTest extends \PHPUnit_Framework_TestCase
+class EmailAddressTest extends TestCase
 {
     /**
      * @dataProvider validValuesProvider
      */
-    public function testValidValues($value)
+    public function testValidValues($value): void
     {
         $valueObject = new EmailAddress($value);
         $this->assertSame($value, $valueObject->value());
     }
 
-    public function validValuesProvider()
+    public static function validValuesProvider(): array
     {
         return array(
             'Simple email' => ['email@domain.com'],
@@ -37,13 +38,13 @@ class EmailAddressTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider notValidValuesProvider
      */
-    public function testNotValidValues($value)
+    public function testNotValidValues($value): void
     {
-        $this->setExpectedException(EmailAddressInvalidException::class);
+        $this->expectException(EmailAddressInvalidException::class);
         new EmailAddress($value);
     }
 
-    public function notValidValuesProvider()
+    public static function notValidValuesProvider(): array
     {
         return array(
             'Missing @ sign and domain' => ['plainaddress'],

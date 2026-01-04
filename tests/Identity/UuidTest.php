@@ -2,21 +2,22 @@
 
 namespace ValueObjects\Tests\Identity;
 
+use PHPUnit\Framework\TestCase;
 use ValueObjects\Exception\Identity\UuidInvalidException;
 use ValueObjects\Identity\Uuid;
 
-class UuidTest extends \PHPUnit_Framework_TestCase
+class UuidTest extends TestCase
 {
     /**
      * @dataProvider validValuesProvider
      */
-    public function testValidValues($value)
+    public function testValidValues($value): void
     {
         $valueObject = new Uuid($value);
         $this->assertSame($value, $valueObject->value());
     }
 
-    public function validValuesProvider()
+    public static function validValuesProvider(): array
     {
         return array(
             'Uuid 1 is a valid value' => ['e4eaaaf2-d142-11e1-b3e4-080027620cdd'],
@@ -30,13 +31,13 @@ class UuidTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider notValidValuesProvider
      */
-    public function testNotValidValues($value)
+    public function testNotValidValues($value): void
     {
-        $this->setExpectedException(UuidInvalidException::class);
+        $this->expectException(UuidInvalidException::class);
         new Uuid($value);
     }
 
-    public function notValidValuesProvider()
+    public static function notValidValuesProvider(): array
     {
         return array(
             'Float is not a valid uuid value' => [0.5],
@@ -48,7 +49,7 @@ class UuidTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    public function testGenerateUuid()
+    public function testGenerateUuid(): void
     {
         $valueObject = Uuid::generate();
         $this->assertInstanceOf('ValueObjects\Identity\Uuid', $valueObject);

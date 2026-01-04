@@ -2,21 +2,22 @@
 
 namespace ValueObjects\Tests\Geography;
 
+use PHPUnit\Framework\TestCase;
 use ValueObjects\Exception\Geography\CountryCodeInvalidException;
 use ValueObjects\Geography\CountryCode;
 
-class CountryCodeTest extends \PHPUnit_Framework_TestCase
+class CountryCodeTest extends TestCase
 {
     /**
      * @dataProvider validValuesProvider
      */
-    public function testValidValues($value)
+    public function testValidValues($value): void
     {
         $valueObject = new CountryCode($value);
         $this->assertSame(strtoupper($value), $valueObject->value());
     }
 
-    public function validValuesProvider()
+    public static function validValuesProvider(): array
     {
         return array(
             'Lower case country code is valid' => ['es'],
@@ -27,13 +28,13 @@ class CountryCodeTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider notValidValuesProvider
      */
-    public function testNotValidValues($value)
+    public function testNotValidValues($value): void
     {
-        $this->setExpectedException(CountryCodeInvalidException::class);
+        $this->expectException(CountryCodeInvalidException::class);
         new CountryCode($value);
     }
 
-    public function notValidValuesProvider()
+    public static function notValidValuesProvider(): array
     {
         return array(
             'KK is not a valid country code' => ['KK'],

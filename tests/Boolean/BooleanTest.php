@@ -4,21 +4,22 @@ declare(strict_types=1);
 
 namespace ValueObjects\Tests\Boolean;
 
+use PHPUnit\Framework\TestCase;
 use ValueObjects\Exception\Boolean\BooleanInvalidException;
 use ValueObjects\Boolean\Boolean;
 
-final class BooleanTest extends \PHPUnit_Framework_TestCase
+final class BooleanTest extends TestCase
 {
     /**
      * @dataProvider validValuesProvider
      */
-    public function testValidValues($value, $filteredValue)
+    public function testValidValues($value, $filteredValue): void
     {
         $valueObject = new Boolean($value);
         $this->assertSame($filteredValue, $valueObject->value());
     }
 
-    public function validValuesProvider()
+    public static function validValuesProvider(): array
     {
         return array(
             'Boolean true is a valid value' => [true, true],
@@ -29,13 +30,13 @@ final class BooleanTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider notValidValuesProvider
      */
-    public function testNotValidValues($value)
+    public function testNotValidValues($value): void
     {
-        $this->setExpectedException(BooleanInvalidException::class);
+        $this->expectException(BooleanInvalidException::class);
         new Boolean($value);
     }
 
-    public function notValidValuesProvider()
+    public static function notValidValuesProvider(): array
     {
         return array(
             'Integer 1 is not a valid value' => [2],

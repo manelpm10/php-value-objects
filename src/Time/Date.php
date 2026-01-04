@@ -113,6 +113,6 @@ class Date extends AbstractValueObject
 
     protected function normalizeValue($value): string
     {
-        return ''.date($this->format, mktime(0, 0, 0, $this->month->value(), $this->day->value(), $this->year->value()));
+        return date($this->format, mktime(0, 0, 0, $this->month->value(), $this->day->value(), $this->year->value()));
     }
 }

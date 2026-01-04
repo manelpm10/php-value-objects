@@ -2,21 +2,22 @@
 
 namespace ValueObjects\Tests\String;
 
+use PHPUnit\Framework\TestCase;
 use ValueObjects\Exception\String\StringInvalidException;
 use ValueObjects\String\StringLiteral;
 
-class StringLiteralTest extends \PHPUnit_Framework_TestCase
+class StringLiteralTest extends TestCase
 {
     /**
      * @dataProvider validValuesProvider
      */
-    public function testValidValues($value)
+    public function testValidValues($value): void
     {
         $valueObject = new StringLiteral($value);
         $this->assertSame($value, $valueObject->value());
     }
 
-    public function validValuesProvider()
+    public static function validValuesProvider(): array
     {
         return array(
             'String text is a valid value' => ['This is valid!'],
@@ -27,13 +28,13 @@ class StringLiteralTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider notValidValuesProvider
      */
-    public function testNotValidValues($value)
+    public function testNotValidValues($value): void
     {
-        $this->setExpectedException(StringInvalidException::class);
+        $this->expectException(StringInvalidException::class);
         new StringLiteral($value);
     }
 
-    public function notValidValuesProvider()
+    public static function notValidValuesProvider(): array
     {
         return array(
             'Float is not a valid string value' => [0.5],
