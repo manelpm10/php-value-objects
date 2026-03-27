@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace ValueObjects;
 
 abstract class AbstractValueObject
@@ -9,7 +11,7 @@ abstract class AbstractValueObject
     public function __construct(mixed $value)
     {
         if (($this instanceof InterfaceNullable && is_null($value)) || $this->guard($value)) {
-            $this->value = (is_null($value))? null : $this->normalizeValue($value);
+            $this->value = (is_null($value)) ? null : $this->normalizeValue($value);
             return true;
         }
 
